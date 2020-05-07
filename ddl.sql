@@ -28,9 +28,40 @@
 
 CREATE TABLE pets (
 	-- columns to be defined in this table
+	-- column_name column_type CONSTRAINTS,	
+--	id SERIAL PRIMARY KEY, -- Very common mechanism for auto incrementing
+	id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, -- newer mechanism
 	name VARCHAR(50),
 	birthdate DATE
 );
+
+CREATE TABLE people (
+	id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	first_name VARCHAR(50),
+	last_name VARCHAR(50),
+	birthdate DATE
+);
+
+CREATE TABLE pet_dishbowl(
+	id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	capacity INTEGER,
+	amount INTEGER,
+	pet_id INTEGER REFER	ENCES pets (id)
+);
+
+CREATE TABLE credit_cards(
+	id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	balance MONEY,
+	credit_limit MONEY,
+	owner_id INTEGER REFERENCES people (id)
+);
+
+CREATE TABLE pet_owners (
+	people_id integer REFERENCES people (id),
+	pets_id integer REFERENCES pets (id),
+	PRIMARY KEY (people_id, pets_id)
+);
+
 
 -- We want to add birthdate.  What would the appropriate type be for birthdate?
 -- ALTER TABLE pets ADD COLUMN birthdate DATE;
@@ -41,6 +72,3 @@ DROP TABLE pets;
 -- Char is a fixed-length, padded string
 -- varchar is a unpadded string with a maximum length
 -- text is an abritrary length string, not easy to query upon
-
-
-
