@@ -32,4 +32,35 @@ INSERT INTO people (first_name, last_name, birthdate) VALUES
   	('Rex', '2014-05-10'),
   	('Spot','2012-10-20');
   
-  
+INSERT INTO credit_cards (balance, credit_limit, owner_id) VALUES
+	(0, 1000, 1);
+INSERT INTO credit_cards (balance, credit_limit, owner_id) VALUES
+	(500, 1000, 1);
+INSERT INTO credit_cards (balance, credit_limit, owner_id) VALUES
+	(2000, 10000, 2);
+INSERT INTO credit_cards (balance, credit_limit, owner_id) VALUES
+	(5000, 10000, 3);
+
+INSERT INTO pet_dishbowl (capacity, amount, pet_id) VALUES
+	(150, 75, 3);
+/*
+ UPDATE table_name SET column = value;
+ DO NOT WRITE UPDATES THAT ARE THIS SIMPLE
+ IT WILL UPDATE EVERYONE!
+
+ How do we indicate which row or rows to upate?
+ WHERE clause - The WHERE clause can be used in a SQL statement that
+ needs to target specific rows, such as UPDATE, DELETE, 
+ or SELECT statements.
+ 
+ The WHERE clause is followed by a predicate which stipulates which rows
+ should be returned.  Any rows which pass the predicate (meaning that the
+ predicate returns true) are included while those that do not are excluded).
+*/
+
+UPDATE people SET first_name = 'Denny' WHERE id = 4;
+
+-- Anatomy of Delete
+-- DELETE FROM tablename WHERE <predicate>;
+
+DELETE FROM people WHERE id = 5;

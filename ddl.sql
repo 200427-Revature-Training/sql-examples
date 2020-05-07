@@ -44,16 +44,19 @@ CREATE TABLE people (
 
 CREATE TABLE pet_dishbowl(
 	id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-	capacity INTEGER,
-	amount INTEGER,
-	pet_id INTEGER REFER	ENCES pets (id)
+	capacity INTEGER NOT NULL,
+	amount INTEGER NOT NULL,
+	pet_id INTEGER REFERENCES pets (id) UNIQUE,
+	CHECK (amount <= capacity AND amount >= 0)
 );
+
 
 CREATE TABLE credit_cards(
 	id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	balance MONEY,
 	credit_limit MONEY,
-	owner_id INTEGER REFERENCES people (id)
+	owner_id INTEGER REFERENCES people (id) NOT NULL,
+	CHECK (balance <= credit_limit)
 );
 
 CREATE TABLE pet_owners (
@@ -65,6 +68,8 @@ CREATE TABLE pet_owners (
 
 -- We want to add birthdate.  What would the appropriate type be for birthdate?
 -- ALTER TABLE pets ADD COLUMN birthdate DATE;
+
+DROP TABLE credit_cards;
 
 DROP TABLE pets;
 -- Data Types
