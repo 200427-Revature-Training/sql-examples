@@ -36,4 +36,8 @@
  constraints possible values by preventing rows from having values that
  already exist in that column.
 
+ EXCLUDE - For a given predicate comparing rows to all other rows, it should
+ never return true.
+ 
+
 */
