@@ -57,10 +57,24 @@ SELECT * FROM pets CROSS JOIN people;
  * 	No ON clause as the join columns are implicit */
 SELECT * FROM people NATURAL JOIN credit_cards;
 
-ALTER TABLE people ADD COLUMN best_friend INTEGER REFERENCES people(id);
 
 SELECT * FROM pets NATURAL JOIN people;
 
 SELECT * FROM people;
 UPDATE pets SET birthdate = '2000-02-01' WHERE id = 2;
 SELECT * FROM pets;
+
+--ALTER TABLE people ADD COLUMN best_friend INTEGER REFERENCES people(id);
+
+SELECT * FROM PEOPLE;
+UPDATE people SET best_friend = 7 WHERE id = 2;
+
+-- SELF JOIN
+-- Select people and show their best friend
+-- Start with rows from people, then add rows from people (best_friends) such that
+-- the joined row represents the row of data that is the base row's best friend
+SELECT people.first_name, best_friends.first_name "best_friend" FROM people 
+	INNER JOIN people AS best_friends ON people.best_friend = best_friends.id;
+
+-- UNEQUAL JOIN
+SELECT * FROM people LEFT JOIN pets ON people.id > pets.id;
